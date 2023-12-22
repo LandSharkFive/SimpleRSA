@@ -8,7 +8,7 @@ namespace SimpleRSA
 
         static void Main(string[] args)
         {
-            // Longs. 3 - 4 digits.
+            // MulMod(). 3 - 4 digits.
             Test1.TestOne(43, 47, Test1.GetString(1));
             Test1.TestOne(173, 199, Test1.GetString(2));
             Test1.TestOne(2609, 2777, Test1.GetString(3));

@@ -96,10 +96,9 @@ namespace SimpleRSA
                 // plain text
                 long pt = msg[i];
                 long k = 1;
-                for (int j = 0; j < key; j++)
+                for (long j = 0; j < key; j++)
                 {
-                    k = k * pt;
-                    k = k % modulus;
+                    k = MulMod(k, pt, modulus);
                 }
 
                 // cipher text
@@ -125,10 +124,9 @@ namespace SimpleRSA
                 // cipher text
                 long ct = en[i] - 96;
                 long k = 1;
-                for (int j = 0; j < key; j++)
+                for (long j = 0; j < key; j++)
                 {
-                    k = k * ct;
-                    k = k % modulus;
+                    k = MulMod(k, ct, modulus);
                 }
 
                 // Get positive modulo.
@@ -139,6 +137,38 @@ namespace SimpleRSA
 
             return sb.ToString();
         }
+
+        // Modular Multiplication. Return (a * b) % mod.  Prevents most overflows.
+        // Overflows when (a % mod) * (b % mod) is greater than 64 bits.
+        // Overflows when modulus is greater than 10 million.
+        public static long MulMod(long a, long b, long mod)
+        {
+            return ((a % mod) * (b % mod)) % mod;
+        }
+
+        // Return (a * b) % mod.  No overflow.  
+        public static long MulModTwo(long a, long b, long mod)
+        {
+            long result = 0; 
+            a = a % mod;
+            while (b > 0)
+            {
+                // If b is odd, add 'a' to result. 
+                if (b % 2 == 1)
+                {
+                    result = (result + a) % mod;
+                }
+
+                // Multiply 'a' with 2.
+                a = (a * 2) % mod;
+
+                // Divide b by 2 
+                b /= 2;
+            }
+
+            return result % mod;
+        }
+
 
         // Positive Modulo. Return a mod n.
         // Result is positive or zero.
