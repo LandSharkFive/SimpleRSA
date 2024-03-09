@@ -17,13 +17,13 @@ To understand how RSA Algorithm works, please see the WIKI on RSA and google RSA
 This code is not safe for production use.  The exponents are too small.  Eight-Hundred (800) bit exponents and moduli can be cracked (factored) in a few hours. A 2,000 bit key (exponent) is required to make factorization and residual key analysis infeasible.  A 3,000 bit RSA key is recommended. The exponents must be stored in a cryptographically secure storage container. Keys must be distributed in a secure manner using Diffie Hellman, Secure IP, Secure DNS, anti-tamper and anti-easedropping (man in the middle) techniques.  This code is only for Educational Purposes.  
 
 ## References
-
+```
 1. RSA CryptoSystem, Wikipedia.
 
 2. Handbook of Applied Cryptography, Alfred J. Menezes, Jonathan Katz, Paul C. van Oorschot, Scott A. Vanstone, CRC Press, 1996.
 
 3. R. L. RIVEST, A. SHAMIR, AND L. ADELMAN, “A Method for Obtaining Digital Signatures and Public-Key Cryptosystems,” Communications of the ACM, 21, 120–126 (1978).
-
+```
    
 
 
