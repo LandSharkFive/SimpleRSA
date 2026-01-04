@@ -1,32 +1,31 @@
 # Simple RSA Examples
 
-This project contains a simple introduction to the RSA (Rivest Shamir Adleman) Algorithm.  RSA is also called the Public Key and Private Key Algorithm. The public key is securely given to the recipient and saved in a secure container.  The private key is kept by the sender in a secure container. The private key is used for encryption. The public key is used for decryption.
+A progressive, educational implementation of the Rivest-Shamir-Adleman (RSA) algorithm in C#. This project breaks down the intimidating mathematics of public-key cryptography into four digestible levels of complexity.
 
-## Install and Build
+### The Logic
+RSA is built on the computational difficulty of factoring large prime numbers. This implementation demonstrates the core relationship between the Public Key (for encryption/distribution) and the Private Key (for decryption/retention), utilizing the `System.Numerics.BigInteger` library for high-precision arithmetic.
 
-The is a C# Console-Mode Project.  Use Visual Studio 2022 and above to compile.  The program uses BigInteger (System.Numerics).
+### Four Levels of Implementation
+The project is structured into four distinct unit tests, each increasing in sophistication:
+1. **Level 1 (Manual Math):** Uses a custom `MulMod()` function to handle powers and modulo operations on individual characters.
+2. **Level 2 (Modular Power):** Introduces a dedicated `ModularPow()` function for more efficient character-by-character processing.
+3. **Level 3 (BigInteger Integration):** Leverages `BigInteger.ModPow()` for optimized, large-scale modular exponentiation.
+4. **Level 4 (Data Packing):** Demonstrates bit-packing by compressing four characters into a 32-bit integer before encryption—the first step toward real-world data throughput.
 
-## Features
+### ⚠️ Security Disclaimer
+This is an **Educational Proof of Concept**. It is not hardened for production environments:
+* **Key Length:** The exponents used here are for demonstration. Modern security requires at least 2,000 to 3,000-bit keys to resist factorization.
+* **Storage:** In a production setting, keys must be held in cryptographically secure containers (HSMs) and distributed via secure protocols like Diffie-Hellman.
+* **Optimizations:** Advanced features like the Rabin-Miller primality test and massive prime generation are left as advanced exercises.
 
-The main project contains four unit tests:  TestOne, TestTwo, TestThree and TestFour.  TestOne is the simplest test.  It uses MulMod() to do the powers and modulo to convert plain text to cipher text.  It does one character at a time.  TestTwo uses a function called ModularPow() to do the powers and modulo one character at a time.  TestThree uses BigInteger to do the powers and modulo with the BigInteger.ModPow() function.  TestThree does the encryption one character at a time.  TestFour uses BigInteger and the BigInteger.ModPow() function.  TestFour packs four characters into a 32-bit integer.  The 32-bit integers are the cipher text.  As the modulus becomes longer, you can pack more characters into a BigInteger.  Longer primes are left as an exercise.  A faster prime detector is Rabin-Miller.  Rabin-Miller is left as an exercise.
+### Build Requirements
+* **Language:** C# / .NET
+* **Compiler:** Visual Studio 2022+
+* **Dependencies:** `System.Numerics`
 
-To understand how RSA Algorithm works, please see the WIKI on RSA and google RSA.  Apologies, I don't have time to explain RSA here.  But I've made these examples as simple as possible at four different levels.
+---
 
-## Warning
-
-This code is not safe for production use.  The exponents are too small.  Eight-Hundred (800) bit exponents and moduli can be cracked (factored) in a few hours. A 2,000 bit key (exponent) is required to make factorization and residual key analysis infeasible.  A 3,000 bit RSA key is recommended. The exponents must be stored in a cryptographically secure storage container. Keys must be distributed in a secure manner using Diffie Hellman, Secure IP, Secure DNS, anti-tamper and anti-easedropping (man in the middle) techniques.  This code is only for Educational Purposes.  
-
-## References
-```
-1. RSA CryptoSystem, Wikipedia.
-
-2. Handbook of Applied Cryptography, Alfred J. Menezes, Jonathan Katz, Paul C. van Oorschot, Scott A. Vanstone, CRC Press, 1996.
-
-3. R. L. RIVEST, A. SHAMIR, AND L. ADELMAN, “A Method for Obtaining Digital Signatures and Public-Key Cryptosystems,” Communications of the ACM, 21, 120–126 (1978).
-```
-   
-
-
-
-
-
+### References
+* **Wikipedia:** [RSA Cryptosystem](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
+* **Menezes et al.:** *Handbook of Applied Cryptography*, CRC Press.
+* **Rivest, Shamir, & Adleman (1978):** *A Method for Obtaining Digital Signatures and Public-Key Cryptosystems*.
