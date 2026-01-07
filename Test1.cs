@@ -9,13 +9,13 @@ namespace SimpleRSA
         {
             Console.WriteLine("p={0} q={1}", p, q);
 
-            if (!Code.CheckPrimes(p, q))
+            if (!RsaEngine.CheckPrimes(p, q))
             {
                 Console.WriteLine("Not Prime");
                 return;
             }
 
-            long[] primes = Code.GetPrimes(p, q);
+            long[] primes = RsaEngine.GetPrimes(p, q);
             for (int i = 0; i < primes.Length / 2; i++)
             {
                 Console.Write("[{0}, {1}] ", primes[i], primes[i + 1]);
@@ -28,7 +28,7 @@ namespace SimpleRSA
 
             Console.WriteLine("e={0} d={1} n={2}", e, d, modulus);
 
-            long[] ct = Code.Encrypt(e, modulus, message);
+            long[] ct = RsaEngine.Encrypt(e, modulus, message);
 
             Console.WriteLine("ENCRYPTED");
             for (int i = 0; i < ct.Length; i++)
@@ -38,7 +38,7 @@ namespace SimpleRSA
 
             Console.WriteLine();
 
-            string plain = Code.Decrypt(d, modulus, ct);
+            string plain = RsaEngine.Decrypt(d, modulus, ct);
 
             Console.WriteLine("DECRYPTED");
             Console.WriteLine(plain);
@@ -49,13 +49,13 @@ namespace SimpleRSA
         {
             Console.WriteLine("p={0} q={1}", p, q);
 
-            if (!Code.CheckPrimes(p, q))
+            if (!RsaEngine.CheckPrimes(p, q))
             {
                 Console.WriteLine("Not Prime");
                 return;
             }
 
-            long[] primes = Code.GetPrimes(p, q);
+            long[] primes = RsaEngine.GetPrimes(p, q);
             for (int i = 0; i < primes.Length / 2; i++)
             {
                 Console.Write("[{0}, {1}] ", primes[i], primes[i + 1]);
@@ -68,7 +68,7 @@ namespace SimpleRSA
 
             Console.WriteLine("e={0} d={1} n={2}", e, d, modulus);
 
-            long[] ct = Code.EncryptTwo(e, modulus, message);
+            long[] ct = RsaEngine.EncryptTwo(e, modulus, message);
 
             Console.WriteLine("ENCRYPTED");
             for (int i = 0; i < ct.Length; i++)
@@ -78,7 +78,7 @@ namespace SimpleRSA
 
             Console.WriteLine();
 
-            string plain = Code.DecryptTwo(d, modulus, ct);
+            string plain = RsaEngine.DecryptTwo(d, modulus, ct);
 
             Console.WriteLine("DECRYPTED");
             Console.WriteLine(plain);
@@ -89,13 +89,13 @@ namespace SimpleRSA
         {
             Console.WriteLine("p={0} q={1}", p, q);
 
-            if (!Code.CheckPrimes(p, q))
+            if (!RsaEngine.CheckPrimes(p, q))
             {
                 Console.WriteLine("Not Prime");
                 return;
             }
 
-            long[] primes = Code.GetPrimes(p, q);
+            long[] primes = RsaEngine.GetPrimes(p, q);
             for (int i = 0; i < primes.Length / 2; i++)
             {
                 Console.Write("[{0}, {1}] ", primes[i], primes[i + 1]);
@@ -108,7 +108,7 @@ namespace SimpleRSA
 
             Console.WriteLine("e={0} d={1} n={2}", e, d, modulus);
 
-            BigInteger[] ct = Code.EncryptThree(e, modulus, message);
+            BigInteger[] ct = RsaEngine.EncryptThree(e, modulus, message);
 
             Console.WriteLine("ENCRYPTED");
             for (int i = 0; i < ct.Length; i++)
@@ -118,7 +118,7 @@ namespace SimpleRSA
 
             Console.WriteLine();
 
-            string plain = Code.DecryptThree(d, modulus, ct);
+            string plain = RsaEngine.DecryptThree(d, modulus, ct);
 
             Console.WriteLine("DECRYPTED");
             Console.WriteLine(plain);
@@ -130,13 +130,13 @@ namespace SimpleRSA
         {
             Console.WriteLine("p={0} q={1}", p, q);
 
-            if (!Code.CheckPrimes(p, q))
+            if (!RsaEngine.CheckPrimes(p, q))
             {
                 Console.WriteLine("Not Prime");
                 return;
             }
 
-            long[] primes = Code.GetPrimes(p, q);
+            long[] primes = RsaEngine.GetPrimes(p, q);
             for (int i = 0; i < primes.Length / 2; i++)
             {
                 Console.Write("[{0}, {1}] ", primes[i], primes[i + 1]);
@@ -149,7 +149,7 @@ namespace SimpleRSA
 
             Console.WriteLine("e={0} d={1} n={2}", e, d, modulus);
 
-            BigInteger[] ct = Code.EncryptFour(e, modulus, message);
+            BigInteger[] ct = RsaEngine.EncryptFour(e, modulus, message);
 
             Console.WriteLine("ENCRYPTED");
             for (int i = 0; i < ct.Length; i++)
@@ -159,7 +159,7 @@ namespace SimpleRSA
 
             Console.WriteLine();
 
-            string plain = Code.DecryptFour(d, modulus, ct);
+            string plain = RsaEngine.DecryptFour(d, modulus, ct);
 
             Console.WriteLine("DECRYPTED");
             Console.WriteLine(plain);
