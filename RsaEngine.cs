@@ -17,17 +17,24 @@ namespace SimpleRSA
             for (long i = 5; i * i <= n; i += 6)
             {
                 if (n % i == 0 || n % (i + 2) == 0)
+                {
                     return false;
+                }
             }
             return true;
         }
 
+        /// <summary>
+        /// Are p and q coprime?
+        /// </summary>
         public static bool CheckPrimes(long p, long q)
         {
             return p != q && IsPrime(p) && IsPrime(q);
         }
 
-        // Get primes.
+        /// <summary>
+        /// Get primes.
+        /// </summary>
         public static long[] GetPrimes(long p, long q)
         {
             const int maxLength = 40;
@@ -57,7 +64,9 @@ namespace SimpleRSA
             return list.ToArray();
         }
 
-        // Get the encryption exponent (e).
+        /// <summary>
+        /// Get the encryption exponent (e).
+        /// </summary>
         public static long GetEncryptExp(long p, long q)
         {
             long totient = (p - 1) * (q - 1);
@@ -77,7 +86,9 @@ namespace SimpleRSA
             return 0;
         }
 
-        // Get Decryption exponent (d).
+        /// <summary>
+        /// Get Decryption exponent (d).
+        /// </summary>
         public static long GetDecryptExp(long x, long t)
         {
             long k = 1;
@@ -85,10 +96,15 @@ namespace SimpleRSA
             {
                 k = k + t;
                 if (k % x == 0)
+                {
                     return k / x;
+                }
             }
         }
 
+        /// <summary>
+        /// Encrypt message using key and modulus.
+        /// </summary>
         public static long[] Encrypt(long key, long modulus, string msg)
         {
             int len = msg.Length;
@@ -115,12 +131,8 @@ namespace SimpleRSA
 
 
         /// <summary>
-        /// Decrypt encrypted text;
+        /// Decrypt the ciphertext (en).
         /// </summary>
-        /// <param name="en">encrypted text</param>
-        /// <param name="key">key</param>
-        /// <param name="n">modulus</param>
-        /// <returns></returns>
         public static string Decrypt(long key, long modulus, long[] en)
         {
             StringBuilder sb = new StringBuilder();
@@ -143,15 +155,19 @@ namespace SimpleRSA
             return sb.ToString();
         }
 
-        // Modular Multiplication. Return (a * b) % mod.  Prevents most overflows.
-        // Overflows when (a % mod) * (b % mod) is greater than 64 bits.
-        // Overflows when modulus is greater than 10 million.
+        /// <summary>
+        /// Modular Multiplication using longs. Return (a * b) % mod.  Prevents most overflows.
+        /// Overflows when (a % mod) * (b % mod) is greater than 64 bits.
+        /// Overflows when modulus is greater than 10 million.
+        /// </summary>
         public static long MulMod(long a, long b, long mod)
         {
             return ((a % mod) * (b % mod)) % mod;
         }
 
-        // Return (a * b) % mod.  No overflow.  
+        /// <summary>
+        /// Modular Multiplication using longs. Return (a * b) % mod.  No overflow. This is faster.
+        /// </summary>
         public static long MulModTwo(long a, long b, long mod)
         {
             long result = 0; 
@@ -175,20 +191,25 @@ namespace SimpleRSA
         }
 
 
-        // Positive Modulo. Return a mod n.
-        // Result is positive or zero.
+        /// <summary>
+        /// Positive Modulo for Int (Int32). Return a mod n. Result is positive or zero.
+        /// </summary>
         public static int PosMod(int a, int n)
         {
             return (a % n + n) % n;
         }
 
-        // Positive Modulo. Return a mod n.
-        // Result is positive or zero.
+        /// <summary>
+        /// Positive Modulo for long (Int64). Return a mod n. Result is positive or zero.
+        /// </summary>
         public static long PosMod(long a, long n)
         {
             return (a % n + n) % n;
         }
 
+        /// <summary>
+        /// Encrypt a message with a key and a modulus. 
+        /// </summary>
         public static long[] EncryptTwo(long key, long modulus, string msg)
         {
             int len = msg.Length;
@@ -210,12 +231,8 @@ namespace SimpleRSA
         }
 
         /// <summary>
-        /// Decrypt encrypted text;
+        /// Decrypt ciphertext (en).
         /// </summary>
-        /// <param name="en">encrypted text</param>
-        /// <param name="key">key</param>
-        /// <param name="n">modulus</param>
-        /// <returns></returns>
         public static string DecryptTwo(long key, long modulus, long[] en)
         {
             StringBuilder sb = new StringBuilder();
@@ -235,8 +252,9 @@ namespace SimpleRSA
         }
 
 
-
-        // Return (num ^ exponent) % modulus.
+        /// <summary>
+        /// Modular Power for longs (Int64).  Return (num ^ exponent) % modulus.
+        /// </summary>
         public static long ModularPow(long num, long exponent, long modulus)
         {
             long result = 1;
@@ -251,14 +269,18 @@ namespace SimpleRSA
             return result;
         }
 
-        // Return (num ^ exponent) % modulus.
+        /// <summary>
+        /// Modular Power for integers (Int32). Return (num ^ exponent) % modulus.
+        /// </summary>
         public static int ModularPow(int num, int exponent, int modulus)
         {
             int result = 1;
             while (exponent > 0)
             {
                 if ((exponent & 1) == 1)
+                {
                     result = (result * num) % modulus;
+                }
                 exponent = exponent >> 1;
                 num = (num * num) % modulus;
             }
@@ -266,6 +288,9 @@ namespace SimpleRSA
             return result;
         }
 
+        /// <summary>
+        /// Encrypt message using BigIntegers.  Use key and modulus. Not packed.
+        /// </summary>
         public static BigInteger[] EncryptThree(BigInteger key, BigInteger modulus, string msg)
         {
             int len = msg.Length;
@@ -286,6 +311,9 @@ namespace SimpleRSA
             return en;
         }
 
+        /// <summary>
+        /// Decrypt ciphertext (en) using BigIntegers.  Use key and modulus. Not packed.
+        /// </summary>
         public static string DecryptThree(BigInteger key, BigInteger modulus, BigInteger[] en)
         {
             StringBuilder sb = new StringBuilder();
@@ -307,6 +335,9 @@ namespace SimpleRSA
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Encrypt message with BigIntegers.  Use key and modulus. Packed.
+        /// </summary>
         public static BigInteger[] EncryptFour(BigInteger key, BigInteger modulus, string msg)
         {
             int len = msg.Length / 4;
@@ -332,6 +363,9 @@ namespace SimpleRSA
             return en;
         }
 
+        /// <summary>
+        /// Decrypt ciphertext (en) using BigIntegers.  Use key and modulus. Unpacked.
+        /// </summary>
         public static string DecryptFour(BigInteger key, BigInteger modulus, BigInteger[] en)
         {
             BigInteger N = int.MaxValue;
@@ -351,7 +385,9 @@ namespace SimpleRSA
         }
 
 
-        // Convert string to Array.
+        /// <summary>
+        /// Convert string to Array.
+        /// </summary>
         public static int[] StrToArray(string str)
         {
             int n = str.Length / 4;
@@ -369,7 +405,9 @@ namespace SimpleRSA
             return array;
         }
 
-        // Convert string to integer.
+        /// <summary>
+        /// Convert string to integer.
+        /// </summary>
         public static int StrToInt(string str)
         {
             int result = 0;
@@ -381,7 +419,9 @@ namespace SimpleRSA
             return result;
         }
 
-        // Convert integer to string.
+        /// <summary>
+        /// Convert integer to string.
+        /// </summary>
         public static string IntToStr(int a)
         {
             string result = string.Empty;
